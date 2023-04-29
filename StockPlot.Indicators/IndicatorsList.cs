@@ -16,7 +16,8 @@ namespace StockPlot.Indicators
                     {"Ichimoku", typeof(Ichimoku) },
                     {"Raghee Horner Wave", typeof(RagheeWave) },
                     {"MACD", typeof(MACD) },
-                    {"EMA", typeof(ExponentialMovingAverage)}
+                    {"EMA", typeof(ExponentialMovingAverage)},
+                    {"Donchian", typeof(Donchian)] }
                 };
             }
         }

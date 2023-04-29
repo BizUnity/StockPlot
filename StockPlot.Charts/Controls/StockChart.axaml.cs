@@ -200,6 +200,11 @@ namespace StockPlot.Charts.Controls
                 SetValue(StockChartIDProperty, value);
             }
         }
+
+        public IndicatorsManager IndicatorsManager
+        {
+            get => _indicatorsManager;
+        }
         #endregion
     }
 }

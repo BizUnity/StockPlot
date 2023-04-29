@@ -10,16 +10,26 @@
 	<Window.DataContext>
 <chart:StockChart/>
 	</Window.DataContext>
-	<Grid RowDefinitions="auto,*">
-		<Button Content="Get real datas"
-				Name="btn"
-				Margin="3"/>
+	<Grid ColumnDefinitions="auto,*">
+		
 		<chart:StockChart CandleDownColor="OrangeRed"
 						  CandleWickColor="Black"
 						  CandleUpColor="#07BF7D"
+						  Grid.Column="1"
 						  DisplayPrice="Candlestick"
 						  ResetAxisOnDoubleClick="True"
 						  Name="StockChart"
 						  Grid.Row="1"/>
+		<StackPanel>
+			<Button Content="Get real datas"
+				Name="btn"
+				Margin="3"/>
+			<ListBox Grid.Row="1"
+					 Items="{Binding ElementName=StockChart, Path=IndicatorsManager.Indicators}"
+					 SelectedItem="{Binding ElementName=StockChart, Path=IndicatorsManager.SelectedIndicator, Mode=TwoWay}"/>
+			<Button Content="Add indicator"
+					Command="{Binding ElementName=StockChart, Path=IndicatorsManager.AddSelectedIndicatorCommand}"/>
+		</StackPanel>
+	
 	</Grid>
 </Window>

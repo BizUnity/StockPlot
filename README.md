@@ -1,5 +1,4 @@
 # StockPlot
-<img src="[https://raw.githubusercontent.com/kikipoulet/SukiUI/main/Images/suki_photo.jpg](https://i.postimg.cc/DzwzfYP6/Stock-Plot3.gif)" width="200" height="200"></img> 
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 
 StockPlot *(will) *allow you to have a full Stock Market Analysis module in your application only by using a single UserControl and a single class. 

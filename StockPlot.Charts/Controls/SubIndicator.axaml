@@ -5,5 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:avaPlot="using:ScottPlot.Avalonia"
              x:Class="StockPlot.Charts.Controls.SubIndicator">
-	<avaPlot:AvaPlot Name="plotArea"/>
+	<Grid>
+		<avaPlot:AvaPlot Name="plotArea"/>
+		<Button Content="remove"
+				VerticalAlignment="Top"
+				Name="removeBTN"
+				HorizontalAlignment="Left"/>
+	</Grid>
 </UserControl>

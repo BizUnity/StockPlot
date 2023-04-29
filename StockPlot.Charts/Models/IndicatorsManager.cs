@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.VisualTree;
 using ReactiveUI;
 using StockPlot.Charts.Controls;
 using StockPlot.Charts.Helpers;
@@ -37,11 +38,10 @@ namespace StockPlot.Charts.Models
 
         private void _stockChart_StockPricesModelChanged(StockPricesModel newModel)
         {
-            var onPrice = OnPriceIndicators.ToList();
-            var sub = SubIndicators.ToList();
-            onPrice.AddRange(sub);
+            var allIndicators = OnPriceIndicators.ToList();
+            allIndicators.AddRange(SubIndicators);
 
-            foreach(var manager in onPrice)
+            foreach(var manager in allIndicators)
             {
                 manager._indicator.Calc(newModel);
                 manager._plotArea.Plot.AxisAuto();
@@ -67,10 +67,13 @@ namespace StockPlot.Charts.Models
 
             var plotArea = _stockChart.PriceArea;
 
+            // need to create a null instance to manager the deletion command
+            SubIndicator subIndicator = null;
+
             if (indicator.IsExternal)
             {
                 // create a new sub chart
-                var subIndicator = new SubIndicator();
+                subIndicator = new SubIndicator();
                 // update the plot area
                 plotArea = subIndicator.PlotArea;
                 // link the axises
@@ -89,7 +92,7 @@ namespace StockPlot.Charts.Models
                 // setup the plot area
                 PlotHelper.SetupBasicPlot(subIndicator.PlotArea, _stockChart.StockChartID);
                 // add a new sub chart in the main grid
-                _AddSubChart(subIndicator);
+                addSubChart(subIndicator);
 
                 _stockChart.PriceArea.Plot.BottomAxis.Ticks(false);
             }
@@ -117,12 +120,17 @@ namespace StockPlot.Charts.Models
             else
             {
                 OnPriceIndicators.Add(manager);
-            }                     
+            }
+
+            // handle te remove process
+            addDeleteCommand(manager);
+            if (subIndicator != null)
+                subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
 
             plotArea.Refresh();
         }
 
-        private void _AddSubChart(UserControl chart)
+        private void addSubChart(UserControl chart)
         {
             _stockChart.MainArea.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(3, GridUnitType.Auto) });
             _stockChart.MainArea.RowDefinitions.Add(new RowDefinition());
@@ -141,6 +149,61 @@ namespace StockPlot.Charts.Models
             Grid.SetRow(chart, _stockChart.MainArea.RowDefinitions.Count - 1);
         }
 
+        private void removeSubChart(UserControl chart)
+        {
+            var row = Grid.GetRow(chart);
+            var grid = _stockChart.MainArea;
+
+            var num = grid.Children.IndexOf(chart);
+
+            grid.Children.RemoveAt(num);
+            grid.Children.RemoveAt(num - 1);
+            grid.RowDefinitions.RemoveAt(row);
+            grid.RowDefinitions.RemoveAt(row - 1);
+
+            for (var i = 0; i < grid.Children.Count; i++)
+            {
+                var row2 = Grid.GetRow(grid.Children[i]);
+                if (row2 > row)
+                {
+                    Grid.SetRow(grid.Children[i], row2 - 2);
+                }
+            }
+        }
+
+        private void addDeleteCommand(IndicatorItemManager manager)
+        {
+            manager.RemoveIndicatorCommand = ReactiveCommand.Create(() =>
+            {               
+                if (manager.Indicator.IsExternal)
+                {
+                    // delete the visual
+                    var subIndicator = manager._plotArea.FindAncestorOfType<SubIndicator>();
+                    if (subIndicator != null)
+                        removeSubChart(subIndicator);
+
+                    // remove from list
+                    SubIndicators.Remove(manager);
+
+                    // re show the hidded bottom axis
+                    if(SubIndicators.Count > 0)
+                    {
+                        SubIndicators.Last()._plotArea.Plot.BottomAxis.Ticks(true);
+                    }
+                    else
+                    {
+                        _stockChart.PriceArea.Plot.BottomAxis.Ticks(true);
+                    }
+                }
+                else
+                {
+                    OnPriceIndicators.Remove(manager);
+                }
+
+                manager.Dispose();
+                manager.Indicator = null;
+            });
+        }
         #region public fields
         /// <summary>
         /// List of available indicators in an Observable for UI purpose

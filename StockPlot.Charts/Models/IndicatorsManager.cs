@@ -76,7 +76,13 @@ namespace StockPlot.Charts.Models
             {
                 indicator.Calc(_stockChart.PricesModel);
                 plotArea.Refresh();
-            };          
+            };
+
+            _stockChart.PricesModel.OnBarAdded += (bar) =>
+            {
+                indicator.Calc(_stockChart.PricesModel);
+                plotArea.Refresh();
+            };
 
             indicator.Calc(_stockChart.PricesModel);
             OnPriceIndicators.Add(manager);

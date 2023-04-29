@@ -10,8 +10,8 @@
 	<Window.DataContext>
 		<stockPlot:StockChart/>
 	</Window.DataContext>
-	<Grid ColumnDefinitions="auto,*">
-
+	<Grid ColumnDefinitions="auto,*,auto"
+		  Margin="5">
 		<stockPlot:StockChart CandleDownColor="OrangeRed"
 						  CandleWickColor="Black"
 						  CandleUpColor="#07BF7D"
@@ -30,6 +30,26 @@
 			<Button Content="Add indicator"
 					Command="{Binding ElementName=StockChart, Path=IndicatorsManager.AddSelectedIndicatorCommand}"/>
 		</StackPanel>
-	
+		<StackPanel Grid.Column="2">
+			<TextBlock Text="On price indicators"
+					   FontWeight="Bold"
+					   HorizontalAlignment="Left"
+					   Margin="3"/>
+			<ItemsControl Items="{Binding ElementName=StockChart, Path=IndicatorsManager.OnPriceIndicators}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Background="BurlyWood"
+									Margin="3">
+							<TextBlock Text="{Binding Indicator.Name}"									   
+									   Margin="3"
+									   HorizontalAlignment="Left"/>
+							<Button Margin="3"
+									Content="Remove"
+									Command="{Binding RemoveIndicatorCommand}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
 	</Grid>
 </Window>

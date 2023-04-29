@@ -18,7 +18,7 @@ namespace StockPlot.Indicators.Indicators
 
         public override void Init()
         {
-            Name = $"Average True Range (ATR) [{this.Period}]";
+            Name = $"Donchian Channel [{this.Period}]";
         }
 
         protected override void Calculate_(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume)

@@ -104,6 +104,8 @@ namespace StockPlot.Charts.Models
             {
                 _plotArea.Plot.Remove(item);
             }
+
+            _plotArea.Refresh();
         }
     }
 }

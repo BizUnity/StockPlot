@@ -71,11 +71,20 @@ namespace StockPlot.Charts.Models
                 plotArea = subIndicator.PlotArea;
                 // link the axises
                 subIndicator.PlotArea.Configuration.AddLinkedControl(_stockChart.PriceArea, layout: false);
+
+                foreach(var item in SubIndicators)
+                {
+                    subIndicator.PlotArea.Configuration.AddLinkedControl(item._plotArea, layout: false);
+                    item._plotArea.Configuration.AddLinkedControl(subIndicator.PlotArea, layout: false);
+                }
+
                 _stockChart.PriceArea.Configuration.AddLinkedControl(subIndicator.PlotArea, layout: false);
                 // setup the plot area
                 PlotHelper.SetupBasicPlot(subIndicator.PlotArea, _stockChart.StockChartID);
                 // add a new sub chart in the main grid
                 _AddSubChart(subIndicator);
+
+                _stockChart.PriceArea.Plot.BottomAxis.Ticks(false);
             }
 
             var manager = new IndicatorItemManager(indicator, plotArea);          
@@ -93,8 +102,17 @@ namespace StockPlot.Charts.Models
             };
 
             indicator.Calc(_stockChart.PricesModel);
-            OnPriceIndicators.Add(manager);
-            _stockChart.PriceArea.Plot.BottomAxis.Ticks(false);
+
+            if(indicator.IsExternal)
+            {
+                SubIndicators.Add(manager);
+            }
+            else
+            {
+                OnPriceIndicators.Add(manager);
+            }                     
+
+            plotArea.Refresh();
         }
 
         private void _AddSubChart(UserControl chart)
@@ -123,6 +141,8 @@ namespace StockPlot.Charts.Models
         public ObservableCollection<string> Indicators { get; private set;  } = new ObservableCollection<string>(IndicatorsList.Indicators.Keys);
 
         public ObservableCollection<IndicatorItemManager> OnPriceIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
+
+        public ObservableCollection<IndicatorItemManager> SubIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
 
         public string SelectedIndicator
         {

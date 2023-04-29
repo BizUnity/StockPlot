@@ -1,4 +1,6 @@
 # StockPlot
+[![Stock-Plot3.gif](https://i.postimg.cc/DzwzfYP6/Stock-Plot3.gif)](https://postimg.cc/xXBQt57N)
+
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 
 StockPlot *(will) *allow you to have a full Stock Market Analysis module in your application only by using a single UserControl and a single class. 
@@ -109,3 +111,4 @@ With this exemple, price is working in live using WebSocket.
 ```
 
 It is very easy to fullfill the chart with datas just by using Append() and UpdateBar().
+**

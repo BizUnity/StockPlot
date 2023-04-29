@@ -124,6 +124,7 @@ namespace StockPlot.Charts.Models
 
             // handle te remove process
             addDeleteCommand(manager);
+            // if the indicator is a sub one, we need to provide the Button with the delete command
             if (subIndicator != null)
                 subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
 
@@ -231,7 +232,7 @@ namespace StockPlot.Charts.Models
         }
 
         /// <summary>
-        /// 
+        /// Command to add a new instance of indicator. The added indicator is the selected one from the Indicators list
         /// </summary>
         public ICommand AddSelectedIndicatorCommand { get; }
         #endregion

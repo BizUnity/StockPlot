@@ -176,6 +176,9 @@ namespace StockPlot.Charts.Controls
 
         public static StyledProperty<StockPricesModel> PricesModelProperty = AvaloniaProperty.Register<StockChart, StockPricesModel>(nameof(ResetAxisOnDoubleClick), new StockPricesModel(true));
 
+        /// <summary>
+        /// PricesModel is the StockPricesModel used i the current StockChart Control instance.
+        /// </summary>
         public StockPricesModel PricesModel
         {
             get=> GetValue(PricesModelProperty);
@@ -201,6 +204,9 @@ namespace StockPlot.Charts.Controls
             }
         }
 
+        /// <summary>
+        /// Indicators Manager allows you to display the available indicator, on price indicators and sub indicators on you own UI.
+        /// </summary>
         public IndicatorsManager IndicatorsManager
         {
             get => _indicatorsManager;

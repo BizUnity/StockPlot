@@ -1,0 +1,25 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="StockPlot.MainWindow"
+		xmlns:chart="using:StockPlot.Charts.Controls"
+		x:DataType="chart:StockChart"
+        Title="StockPlot">
+	<Window.DataContext>
+<chart:StockChart/>
+	</Window.DataContext>
+	<Grid RowDefinitions="auto,*">
+		<Button Content="Get real datas"
+				Name="btn"
+				Margin="3"/>
+		<chart:StockChart CandleDownColor="OrangeRed"
+						  CandleWickColor="Black"
+						  CandleUpColor="#07BF7D"
+						  DisplayPrice="Candlestick"
+						  ResetAxisOnDoubleClick="True"
+						  Name="StockChart"
+						  Grid.Row="1"/>
+	</Grid>
+</Window>

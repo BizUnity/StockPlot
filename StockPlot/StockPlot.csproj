@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <BuiltInComInteropSupport>true</BuiltInComInteropSupport>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <TrimmerRootAssembly Include="Avalonia.Themes.Fluent" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.0.0-preview6" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.0.0-preview6" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.0.0-preview6" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0-preview6" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.0-preview6" />
+    <PackageReference Include="Binance.Net" Version="8.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\StockPlot.Charts\StockPlot.Charts.csproj" />
+  </ItemGroup>
+</Project>

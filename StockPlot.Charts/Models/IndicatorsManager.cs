@@ -37,7 +37,11 @@ namespace StockPlot.Charts.Models
 
         private void _stockChart_StockPricesModelChanged(StockPricesModel newModel)
         {
-            foreach(var manager in OnPriceIndicators)
+            var onPrice = OnPriceIndicators.ToList();
+            var sub = SubIndicators.ToList();
+            onPrice.AddRange(sub);
+
+            foreach(var manager in onPrice)
             {
                 manager._indicator.Calc(newModel);
                 manager._plotArea.Plot.AxisAuto();

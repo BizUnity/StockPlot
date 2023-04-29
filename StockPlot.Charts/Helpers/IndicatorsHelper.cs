@@ -7,6 +7,9 @@ namespace StockPlot.Charts
     {
         public static bool Calc(this IndicatorBase indicator, StockPricesModel model)
         {
+            if (indicator == null) 
+                return false;
+
             return indicator.Calculate(model.Prices.Count,
                 model.Prices.Select(x => x.DateTime).ToArray(),
                 model.Prices.Select(x => x.Open).ToArray(),

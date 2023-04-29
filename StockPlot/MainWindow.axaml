@@ -4,15 +4,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="StockPlot.MainWindow"
-		xmlns:chart="using:StockPlot.Charts.Controls"
-		x:DataType="chart:StockChart"
+		xmlns:stockPlot="using:StockPlot.Charts.Controls"
+		x:DataType="stockPlot:StockChart"
         Title="StockPlot">
 	<Window.DataContext>
-<chart:StockChart/>
+		<stockPlot:StockChart/>
 	</Window.DataContext>
 	<Grid ColumnDefinitions="auto,*">
-		
-		<chart:StockChart CandleDownColor="OrangeRed"
+
+		<stockPlot:StockChart CandleDownColor="OrangeRed"
 						  CandleWickColor="Black"
 						  CandleUpColor="#07BF7D"
 						  Grid.Column="1"

@@ -204,22 +204,35 @@ namespace StockPlot.Charts.Models
                 manager.Indicator = null;
             });
         }
+
         #region public fields
         /// <summary>
         /// List of available indicators in an Observable for UI purpose
         /// </summary>
         public ObservableCollection<string> Indicators { get; private set;  } = new ObservableCollection<string>(IndicatorsList.Indicators.Keys);
 
+        /// <summary>
+        /// The list of working indicators displayed on the main price area
+        /// </summary>
         public ObservableCollection<IndicatorItemManager> OnPriceIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
 
+        /// <summary>
+        /// The list of working sub indicators 
+        /// </summary>
         public ObservableCollection<IndicatorItemManager> SubIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
 
+        /// <summary>
+        /// The selected indicator from available indcators list. Used to add a new IndicatorBase instance
+        /// </summary>
         public string SelectedIndicator
         {
             get => _selectedIndicator;
             set => this.RaiseAndSetIfChanged(ref _selectedIndicator, value);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public ICommand AddSelectedIndicatorCommand { get; }
         #endregion
     }

@@ -29,7 +29,6 @@ public partial class MainWindow : Window
 
     private async Task getDataFromBinance()
     {
-
         var client = new BinanceClient();
 
         var request = await client.SpotApi.ExchangeData.GetUiKlinesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneMinute, limit: 500);

@@ -1,5 +1,5 @@
 # StockPlot
-![](StockPlot3.gif)
+![](/Images/StockPlot3.gif)
 
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 

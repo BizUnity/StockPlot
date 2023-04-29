@@ -3,16 +3,19 @@ using ReactiveUI;
 using StockPlot.Charts.Controls;
 using StockPlot.Charts.Helpers;
 using StockPlot.Indicators;
-using StockPlot.Indicators.Indicators;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using System.Xml.Linq;
 
 namespace StockPlot.Charts.Models
 {
     public class IndicatorsManager : ReactiveObject
     {
+        #region private fields
         private StockChart _stockChart;
-
-        public ObservableCollection<IndicatorItemManager> OnPriceIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
+        private string _selectedIndicator = string.Empty;
+        #endregion
+              
 
         public IndicatorsManager(StockChart stockChart)
         {
@@ -21,10 +24,15 @@ namespace StockPlot.Charts.Models
             // when we change the price, we need to update the indicators with the new model
             _stockChart.StockPricesModelChanged += _stockChart_StockPricesModelChanged;
 
-            addAnIndicator(new Donchian() { Period = 50 });
-            addAnIndicator(new Ichimoku());
-            addAnIndicator(new MACD());
-            addAnIndicator(new ATR());
+            // create the command to add a selected indicator from the available list
+            AddSelectedIndicatorCommand = ReactiveCommand.Create(() =>
+            {
+                if (IndicatorsList.Indicators.Keys.Contains(_selectedIndicator))
+                {
+                    var newIndicator = Activator.CreateInstance(IndicatorsList.Indicators[_selectedIndicator]) as IndicatorBase;
+                    addAnIndicator(newIndicator);
+                }
+            });
         }
 
         private void _stockChart_StockPricesModelChanged(StockPricesModel newModel)
@@ -107,5 +115,22 @@ namespace StockPlot.Charts.Models
             _stockChart.MainArea.Children.Add(chart);
             Grid.SetRow(chart, _stockChart.MainArea.RowDefinitions.Count - 1);
         }
+
+        #region public fields
+        /// <summary>
+        /// List of available indicators in an Observable for UI purpose
+        /// </summary>
+        public ObservableCollection<string> Indicators { get; private set;  } = new ObservableCollection<string>(IndicatorsList.Indicators.Keys);
+
+        public ObservableCollection<IndicatorItemManager> OnPriceIndicators { get; private set; } = new ObservableCollection<IndicatorItemManager>();
+
+        public string SelectedIndicator
+        {
+            get => _selectedIndicator;
+            set => this.RaiseAndSetIfChanged(ref _selectedIndicator, value);
+        }
+
+        public ICommand AddSelectedIndicatorCommand { get; }
+        #endregion
     }
 }

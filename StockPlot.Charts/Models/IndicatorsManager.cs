@@ -76,6 +76,9 @@ namespace StockPlot.Charts.Models
                 {
                     subIndicator.PlotArea.Configuration.AddLinkedControl(item._plotArea, layout: false);
                     item._plotArea.Configuration.AddLinkedControl(subIndicator.PlotArea, layout: false);
+
+                    //hidding the x axis
+                    item._plotArea.Plot.BottomAxis.Ticks(false);
                 }
 
                 _stockChart.PriceArea.Configuration.AddLinkedControl(subIndicator.PlotArea, layout: false);

@@ -17,7 +17,7 @@ namespace StockPlot.Indicators
                     {"Raghee Horner Wave", typeof(RagheeWave) },
                     {"MACD", typeof(MACD) },
                     {"EMA", typeof(ExponentialMovingAverage)},
-                    {"Donchian", typeof(Donchian)] }
+                    {"Donchian", typeof(Donchian) }
                 };
             }
         }

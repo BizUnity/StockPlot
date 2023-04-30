@@ -54,11 +54,11 @@ This library contains all the controls and logics.
 3) Add the StockChart control in your axaml code :
 ```xml
 <stockPlot:StockChart CandleDownColor="OrangeRed"
-						             CandleWickColor="Black"
-						             CandleUpColor="#07BF7D"
-						             DisplayPrice="Candlestick"
-						             ResetAxisOnDoubleClick="True"
-						             Name="StockChart"/>
+                      CandleWickColor="Black"
+		      CandleUpColor="#07BF7D"
+		      DisplayPrice="Candlestick"
+		      ResetAxisOnDoubleClick="True"
+		      Name="StockChart"/>
 ```
 4) In your C# code, find the StockChart control :
 ```csharp

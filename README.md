@@ -2,6 +2,7 @@
 An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange") and [BizUnity](https://www.linkedin.com/company/bizunity/ "BizUnity")
 
 ![](/Images/ouinex.png)
+
 ![](/Images/BizUnity.jpeg)
 
 # StockPlot

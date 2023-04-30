@@ -78,8 +78,14 @@ With this exemple, price is working in live using WebSocket.
 
     if (request.Success)
     {
-        var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice,(double)x.HighPrice, (double)x.LowPrice, (double)x.ClosePrice, x.OpenTime, TimeSpan.FromMinutes(1))).ToArray();
+        var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice,
+        (double)x.HighPrice, 
+        (double)x.LowPrice, 
+        (double)x.ClosePrice, 
+        x.OpenTime, 
+        TimeSpan.FromMinutes(1))).ToArray();
 
+        // Append the all bars
         model.Append(bars);
 
         var socket = new BinanceSocketClient();
@@ -91,6 +97,7 @@ With this exemple, price is working in live using WebSocket.
 
                 var toUpdate = model.Prices.FirstOrDefault(x => x.DateTime == candle.OpenTime);
 
+                // Check if the data time are the same as the last. If not, it means we have to add a new bar
                 if (toUpdate != null)
                 {
                     toUpdate.Volume = (double)candle.Volume;
@@ -98,11 +105,18 @@ With this exemple, price is working in live using WebSocket.
                     toUpdate.Close = (double)candle.ClosePrice;
                     toUpdate.Low = (double)candle.LowPrice;
 
+                    // Update the last bar
                     model.UpdateBar(toUpdate);
                 }
                 else
                 {
-                    var newBar = new OHLC((double)candle.OpenPrice, (double)candle.HighPrice, (double)candle.LowPrice, (double)candle.ClosePrice, candle.OpenTime, TimeSpan.FromMinutes(1));
+                    var newBar = new OHLC((double)candle.OpenPrice, 
+                    (double)candle.HighPrice,
+                    (double)candle.LowPrice, 
+                    (double)candle.ClosePrice, 
+                    candle.OpenTime, TimeSpan.FromMinutes(1));
+
+                    // Append the new bar
                     model.Append(newBar);
                 }
             }, DispatcherPriority.Background);                       

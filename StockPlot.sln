@@ -12,6 +12,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{9915B297-A9B4-4545-938C-32040317BAA6}"
 	ProjectSection(SolutionItems) = preProject
 		Images\ouinex.png = Images\ouinex.png
+		Images\BizUnity.jpeg = Images\BizUnity.jpeg
 		README.md = README.md
 		Images\StockPlot3.gif = Images\StockPlot3.gif
 	EndProjectSection

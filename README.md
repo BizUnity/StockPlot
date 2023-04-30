@@ -72,42 +72,42 @@ _chart.PricesModel = model;
 6) FullFill the model with datas. For this exemple we will use Binance API using [Binance.NET](https://github.com/JKorf/Binance.Net "Binance.NET") library.
 With this exemple, price is working in live using WebSocket.
 ```csharp
- var client = new BinanceClient();
+    var client = new BinanceClient();
 
-        var request = await client.SpotApi.ExchangeData.GetUiKlinesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneMinute, limit: 500);
+    var request = await client.SpotApi.ExchangeData.GetUiKlinesAsync("BTCUSDT", Binance.Net.Enums.KlineInterval.OneMinute, limit: 500);
 
-        if (request.Success)
+    if (request.Success)
+    {
+        var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice,(double)x.HighPrice, (double)x.LowPrice, (double)x.ClosePrice, x.OpenTime, TimeSpan.FromMinutes(1))).ToArray();
+
+        model.Append(bars);
+
+        var socket = new BinanceSocketClient();
+        await socket.SpotStreams.SubscribeToKlineUpdatesAsync("BTCUSDT", Binance.Net.Enums.KlineInterval.OneMinute, async (data) =>
         {
-            var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice,(double)x.HighPrice, (double)x.LowPrice, (double)x.ClosePrice, x.OpenTime, TimeSpan.FromMinutes(1))).ToArray();
-
-            model.Append(bars);
-
-            var socket = new BinanceSocketClient();
-            await socket.SpotStreams.SubscribeToKlineUpdatesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneMinute, async (data) =>
+            await Dispatcher.UIThread.InvokeAsync(() =>
             {
-                await Dispatcher.UIThread.InvokeAsync(() =>
+                var candle = data.Data.Data;
+
+                var toUpdate = model.Prices.FirstOrDefault(x => x.DateTime == candle.OpenTime);
+
+                if (toUpdate != null)
                 {
-                    var candle = data.Data.Data;
+                    toUpdate.Volume = (double)candle.Volume;
+                    toUpdate.High = (double)candle.HighPrice;
+                    toUpdate.Close = (double)candle.ClosePrice;
+                    toUpdate.Low = (double)candle.LowPrice;
 
-                    var toUpdate = model.Prices.FirstOrDefault(x => x.DateTime == candle.OpenTime);
-
-                    if (toUpdate != null)
-                    {
-                        toUpdate.Volume = (double)candle.Volume;
-                        toUpdate.High = (double)candle.HighPrice;
-                        toUpdate.Close = (double)candle.ClosePrice;
-                        toUpdate.Low = (double)candle.LowPrice;
-
-                        model.UpdateBar(toUpdate);
-                    }
-                    else
-                    {
-                        var newBar = new OHLC((double)candle.OpenPrice, (double)candle.HighPrice, (double)candle.LowPrice, (double)candle.ClosePrice, candle.OpenTime, TimeSpan.FromMinutes(1));
-                        model.Append(newBar);
-                    }
-                }, DispatcherPriority.Background);                       
-            });
-        }
+                    model.UpdateBar(toUpdate);
+                }
+                else
+                {
+                    var newBar = new OHLC((double)candle.OpenPrice, (double)candle.HighPrice, (double)candle.LowPrice, (double)candle.ClosePrice, candle.OpenTime, TimeSpan.FromMinutes(1));
+                    model.Append(newBar);
+                }
+            }, DispatcherPriority.Background);                       
+        });
+    }
 ```
 
 It is very easy to fullfill the chart with datas just by using Append() and UpdateBar().

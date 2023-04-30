@@ -8,7 +8,7 @@ An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange")
 
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 
-StockPlot *(will) *allow you to have a full Stock Market Analysis module in your application only by using a single UserControl and a single class. 
+StockPlot *(will)* allow you to have a full Stock Market Analysis module in your application only by using a single UserControl and a single class. 
 
 StockPlot are in a very early stage (started in April 2023). A lot of features need to be created before deploying a proper and working Nuget Package.
 Some refactoring may need to be done a couple of time, **do not use it in a production yet. **
@@ -32,23 +32,23 @@ Play around, do not hesitate to contribute <3 .
 
 ## Features planned
 
-+ #####Price displaying
++ ##### Price displaying
 	+ Allowing the user to choose the price type (candle, OHLC or line).
 	+ Add the line type chart.
 	+ Allowing the user to customize the charts and price colors.
-+ #####Indicators :
++ ##### Indicators :
 	+ Ability to change the parametters of an indicator.
 	+ Ability to change the visual parametter of an indicator (eg : line style, line color, ...).
 		+ For both of those previous point, we need to create and add a PropertyGrid Control.
 	+ Display the list of working indicators on price.
-+ #####Drawing tools
++ ##### Drawing tools
 	+ Add an horizontal line on a specified price (Y Axis).
 	+ Add a vertical line on a specified time (X Axis).
 	+ Add a limited line (X1,Y1,X2,Y2).
 	+ Add Fibonacci retracement.
 	+ Add Andrew Pitchfork.
 	+ ...
-+ ####Presets
++ #### Presets
 	+ Save and load a preset of indicators.
 	+ Save and load a preset of draws.
 

@@ -1,3 +1,8 @@
+
+An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange")
+
+![](/Images/ouinex.png)
+
 # StockPlot
 ![](/Images/StockPlot3.gif)
 
@@ -9,9 +14,7 @@ StockPlot are in a very early stage (started in April 2023). A lot of features n
 Some refactoring may need to be done a couple of time, **do not use it in a production yet. **
 Play around, do not hesitate to contribute <3 .
 
-Powered by [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange")
 
-![](/Images/ouinex.png)
 
 ## Current features
 + Display the price using Candlesticks or Bars (OHLC) with a full live datas update support :

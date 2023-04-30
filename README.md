@@ -8,6 +8,10 @@ StockPlot *(will) *allow you to have a full Stock Market Analysis module in your
 StockPlot are in a very early stage (started in April 2023). A lot of features need to be created before deploying a proper and working Nuget Package.
 Some refactoring may need to be done a couple of time, **do not use it in a production yet. **
 Play around, do not hesitate to contribute <3 .
+
+Powered by [Ouinex Exchange](htttp://ouinex.com/ "Ouinex Exchange")
+![](/Images/ouinex.png)
+
 ## Current features
 + Display the price using Candlesticks or Bars (OHLC) with a full live datas update support :
 	+ Update the last bar (OHLC).

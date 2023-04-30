@@ -11,6 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StockPlot.Indicators", "Sto
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{9915B297-A9B4-4545-938C-32040317BAA6}"
 	ProjectSection(SolutionItems) = preProject
+		Images\ouinex.png = Images\ouinex.png
 		README.md = README.md
 		Images\StockPlot3.gif = Images\StockPlot3.gif
 	EndProjectSection

@@ -8,6 +8,8 @@ An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange") and [Bi
 # StockPlot
 ![](/Images/StockPlot3.gif)
 
+![](/Images/stockplot4.gif)
+
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 
 StockPlot *(will)* allow you to have a full Stock Market Analysis module in your application only by using a single UserControl and a single class. 

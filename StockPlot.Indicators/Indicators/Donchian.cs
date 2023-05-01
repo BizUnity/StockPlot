@@ -14,6 +14,7 @@ namespace StockPlot.Indicators.Indicators
 
         public Donchian()
         {
+            AddFill("Up", "Down");
         }
 
         public override void Init()
@@ -25,8 +26,8 @@ namespace StockPlot.Indicators.Indicators
         {
             for (int i = 0; i < total; i++)
             {
-                this.Up.Append((time[i], high.GetHighest(i, Period)));
-                this.Down.Append((time[i], low.GetLowest(i, Period)));
+                this.Up.Append((time[i], i < Period ? high[i] : high.GetHighest(i, Period)));
+                this.Down.Append((time[i], i < Period ? low[i] : low.GetLowest(i, Period)));
             }
         }
     }

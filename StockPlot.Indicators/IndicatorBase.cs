@@ -9,6 +9,7 @@ namespace StockPlot.Indicators
         private List<XYSerie> _xySeries = new List<XYSerie>();
         private List<XYYSerie> _xyySeries = new List<XYYSerie>();
         private List<IndicatorLevel> _levels = new List<IndicatorLevel>();
+        private List<Fill> _fills = new List<Fill>();
 
         [Browsable(false)]
         public string Name
@@ -50,6 +51,16 @@ namespace StockPlot.Indicators
             }
         }
 
+        [Browsable(false)]
+        public IReadOnlyList<Fill> Fills
+        {
+            get
+            {
+                return _fills;
+            }
+        }
+
+
         public event CalculatedHandler OnCalculated;
 
         protected IndicatorBase()
@@ -74,6 +85,13 @@ namespace StockPlot.Indicators
                 .Select((p) => p.GetValue(this))
                 .Cast<IndicatorLevel>()
                 .ToList();
+
+            _fills = GetType()
+                .GetProperties()
+                .Where((p) => (p.CanRead && (p.PropertyType.IsAssignableFrom(typeof(Fill)))))
+                .Select((p) => p.GetValue(this))
+                .Cast<Fill>()
+                .ToList();
         }
 
         protected abstract void Calculate_(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume);
@@ -83,6 +101,11 @@ namespace StockPlot.Indicators
         protected void CreateLevel(double y, Color color)
         {
             _levels.Add(new IndicatorLevel(y, color));
+        }
+
+        protected void AddFill(string serieAName, string serieBName)
+        {
+            _fills.Add(new Fill(serieAName, serieBName));
         }
 
         public bool Calculate(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume)

@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Avalonia.Controls.Documents;
+using ReactiveUI;
 using ScottPlot.Avalonia;
 using ScottPlot.Plottable;
 using StockPlot.Indicators;
@@ -63,27 +64,41 @@ namespace StockPlot.Charts.Models
 
         private void displayXYYSeries()
         {
-            foreach (var xyy in _indicator.XyySeries)
+            foreach (var fill in _indicator.Fills)
             {
-                var fill = _plotArea.Plot.AddFillError(new double[1] { 1 }, new double[1] { 1 }, new double[1] { 1 });
-                fill.YAxisIndex = 1;
-                _series.Add(fill);
+                var plot = _plotArea.Plot.AddFill(new double[3] { 1,1,1 }, new double[3] { 1,1,1 }, new double[3] { 1, 1, 1 }, new double[3] { 1, 1, 1 });
+                plot.YAxisIndex = 1;
+                _series.Add(plot);
 
                 _indicator.OnCalculated += () =>
-                {                    
-                    var xs = xyy.Select(x => x.Item1.ToOADate()).ToArray();
-                    var ys1 = xyy.Select(x => x.Item2).ToArray();
-                    var ys2 = xyy.Select(x => x.Item3).ToArray();
+                {
+                    var xs1 = _indicator.Series.Where(x => x.SerieName == fill.SerieA).First().Select(x => x.Time.ToOADate()).ToArray();
+                    var xs2 = _indicator.Series.Where(x => x.SerieName == fill.SerieB).First().Select(x => x.Time.ToOADate()).ToArray();
+                    var ys1 = _indicator.Series.Where(x => x.SerieName == fill.SerieA).First().Select(x => x.Value).ToArray();
+                    var ys2 = _indicator.Series.Where(x => x.SerieName == fill.SerieB).First().Select(x => x.Value).ToArray();
 
-                    double[] polyXs = new double[] { xs[0] }.Concat(xs.Concat(xs.Reverse())).ToArray();
-                    double[] polyYs = new double[] { ys1[0] }.Concat(ys1.Concat(ys2.Reverse())).ToArray();
+                    // combine xs and ys to make one big curve
+                    int pointCount = xs1.Length + xs2.Length;
+                    double[] bothX = new double[pointCount];
+                    double[] bothY = new double[pointCount];
 
-                    fill.Xs = polyXs;
-                    fill.Ys = polyYs;
+                    // copy the first dataset as-is
+                    Array.Copy(xs1, 0, bothX, 0, xs1.Length);
+                    Array.Copy(ys1, 0, bothY, 0, ys1.Length);
+
+                    // copy the second dataset in reverse order
+                    for (int i = 0; i < xs2.Length; i++)
+                    {
+                        bothX[xs1.Length + i] = xs2[xs2.Length - 1 - i];
+                        bothY[ys1.Length + i] = ys2[ys2.Length - 1 - i];
+                    }
+
+                    plot.Xs = bothX;
+                    plot.Ys = bothY;
+
                 };
             }
         }
-
         private void displayLevels()
         {
             if (_indicator.Levels.Count <= 0)

@@ -21,7 +21,7 @@ namespace StockPlot.Charts.Models
             _indicator.Init();
 
             displayXYSeries();
-            // displayXYYSeries();
+            displayXYYSeries();
             displayLevels();
         }
 
@@ -64,14 +64,22 @@ namespace StockPlot.Charts.Models
         private void displayXYYSeries()
         {
             foreach (var xyy in _indicator.XyySeries)
-            { 
-                _indicator.OnCalculated += () =>
-                {
-                    var xs = xyy.Select(x => x.Item1.ToOADate()).ToArray();
-                    var y1 = xyy.Select(x => x.Item2).ToArray();
-                    var y2 = xyy.Select(x => x.Item3).ToArray();
+            {
+                var fill = _plotArea.Plot.AddFillError(new double[1] { 1 }, new double[1] { 1 }, new double[1] { 1 });
+                fill.YAxisIndex = 1;
+                _series.Add(fill);
 
-                    var fill = _plotArea.Plot.AddFill(xs, y2, y1);
+                _indicator.OnCalculated += () =>
+                {                    
+                    var xs = xyy.Select(x => x.Item1.ToOADate()).ToArray();
+                    var ys1 = xyy.Select(x => x.Item2).ToArray();
+                    var ys2 = xyy.Select(x => x.Item3).ToArray();
+
+                    double[] polyXs = new double[] { xs[0] }.Concat(xs.Concat(xs.Reverse())).ToArray();
+                    double[] polyYs = new double[] { ys1[0] }.Concat(ys1.Concat(ys2.Reverse())).ToArray();
+
+                    fill.Xs = polyXs;
+                    fill.Ys = polyYs;
                 };
             }
         }

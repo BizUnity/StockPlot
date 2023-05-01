@@ -202,7 +202,8 @@ namespace StockPlot.Charts.Models
                 }
 
                 manager.Dispose();
-                manager.Indicator = null;
+                // set manager as null to sensure it wont be used on tick update
+                manager = null;
             });
         }
 

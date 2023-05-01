@@ -20,9 +20,9 @@ namespace StockPlot.Charts.Models
             _plotArea = priceArea;
 
             _indicator.Init();
-
+           
+            displayFills();
             displayXYSeries();
-            displayXYYSeries();
             displayLevels();
         }
 
@@ -62,7 +62,7 @@ namespace StockPlot.Charts.Models
             }
         }
 
-        private void displayXYYSeries()
+        private void displayFills()
         {
             foreach (var fill in _indicator.Fills)
             {

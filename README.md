@@ -6,9 +6,7 @@ An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange") and [Bi
 ![](/Images/BizUnity.jpeg)
 
 # StockPlot
-![](/Images/StockPlot3.gif)
-
-![](/Images/stockplot4.gif)
+![](/Images/StockPlot5.gif)
 
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 

@@ -5,9 +5,9 @@ namespace StockPlot.Indicators.Indicators
 {
     public sealed class Donchian : IndicatorBase
     {
-        public XYSerie Up { get; private set; } = new XYSerie("Up") { DefaultColor = Color.Green };
+        public XYSerie Up { get; private set; } = new XYSerie("Up") { DefaultColor = Color.Transparent };
 
-        public XYSerie Down { get; private set; } = new XYSerie("Down") { DefaultColor = Color.OrangeRed };
+        public XYSerie Down { get; private set; } = new XYSerie("Down") { DefaultColor = Color.Transparent };
 
         [IndicatorParameter]
         public int Period { get; set; } = 14;

@@ -4,60 +4,53 @@ namespace StockPlot.Indicators.Indicators
 {
     public sealed class Ichimoku : IndicatorBase
     {
-        private int _InpTenkan = 9;
-        private int _InpKijun = 26;
-        private int _InpSenkou = 52;
-        private XYYSerie _Cloud { get; } = new XYYSerie("");
+        [IndicatorParameter]
+        public int InpTenkan { get; set; } = 9;
+        [IndicatorParameter]
+        public int InpKijun { get; set; } = 26;
+        [IndicatorParameter]
+        public int InpSenkou { get; set; } = 52;
 
+        public XYSerie Tenkan { get; } = new XYSerie("Tenkan");
+        public XYSerie Kijun { get; } = new XYSerie("Kijun") { DefaultColor = Color.Red };
+        public XYSerie Chikou { get; } = new XYSerie("Chikou") { DefaultColor = Color.Blue };
+        public XYSerie CloudA { get; } = new XYSerie("CouldA") { DefaultColor = Color.FromArgb(50, Color.Green) };
+        public XYSerie CloudB { get; } = new XYSerie("CloudB") { DefaultColor = Color.FromArgb(50, Color.Green) };
 
-        public XYSerie Tenkan { get; } = new XYSerie("");
-        public XYSerie Kijun { get; } = new XYSerie("") { DefaultColor = Color.Red };
-        public XYSerie Chikou { get; } = new XYSerie("") { DefaultColor = Color.Blue };
-        public XYYSerie Cloud { get; } = new XYYSerie("");
+        public XYYSerie Cloud { get; } = new XYYSerie("Cloud");
 
-        public Ichimoku()
+        public override void Init()
         {
-            Name = "Ichimoku";
+            Name = $"Ichimoku [Tenkan ({InpTenkan}), Kijun ({InpKijun}), Senkou ({InpSenkou})]";
         }
 
         protected override void Calculate_(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume)
         {
-            _Cloud.Clear();
+            var span = (time[1] - time[0]).TotalMinutes;
 
             for (int i = 0; i < total; i++)
             {
-                var highest = high.GetHighest(i, _InpTenkan);
-                var lowest = low.GetLowest(i, _InpTenkan);
+                var highest = high.GetHighest(i, InpTenkan);
+                var lowest = low.GetLowest(i, InpTenkan);
                 Tenkan.Append((time[i], (highest + lowest) / 2));
 
-                highest = high.GetHighest(i, _InpKijun);
-                lowest = low.GetLowest(i, _InpKijun);
-                Kijun.Append((time[i], (highest + lowest) / 2));
+                highest = high.GetHighest(i, InpKijun);
+                lowest = low.GetLowest(i, InpKijun);
+                Kijun.Append((time[i],(highest + lowest) / 2));
 
-                highest = high.GetHighest(i, _InpSenkou);
-                lowest = low.GetLowest(i, _InpSenkou);
+                highest = high.GetHighest(i, InpSenkou);
+                lowest = low.GetLowest(i, InpSenkou);
 
-               _Cloud.Append((time[i], (Tenkan[i].Value + Kijun[i].Value) / 2, (highest + lowest) / 2));
+                Chikou.Append((time[i], i < total - InpKijun ? close[i + InpKijun] : double.NaN));
 
-                Chikou.Append((time[i], i < total - _InpKijun ? close[i + _InpKijun] : double.NaN));
-            }
-
-
-            var span = (time[1] - time[0]).TotalMinutes;
-
-            for (int i = 0; i < total + _InpKijun; i++)
-            {
-                if (i < _InpKijun)
-                {
-                    Cloud.Append((time[i], double.NaN, double.NaN));
-                }
-                else
-                {
-                    var newTime = time[i - _InpKijun].AddMinutes(_InpKijun * span);
-
-                    Cloud.Append((newTime, _Cloud[i - _InpKijun].Item2, _Cloud[i - _InpKijun].Item3));
-                }
+                var newTime = time[i].AddMinutes(InpKijun * span);
+                var a = (Tenkan[i].Value + Kijun[i].Value) / 2;
+                var b = (highest + lowest) / 2;
+                CloudA.Append((newTime, a));
+                CloudB.Append((newTime, b));
+                Cloud.Append((newTime, a, b));
             }
         }
     }
 }
+

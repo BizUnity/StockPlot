@@ -3,6 +3,7 @@ using ReactiveUI;
 using ScottPlot.Avalonia;
 using ScottPlot.Plottable;
 using StockPlot.Indicators;
+using System.Drawing;
 using System.Windows.Input;
 
 namespace StockPlot.Charts.Models
@@ -20,10 +21,10 @@ namespace StockPlot.Charts.Models
             _plotArea = priceArea;
 
             _indicator.Init();
-           
+
             displayFills();
             displayXYSeries();
-            displayLevels();
+            displayLevels();            
         }
 
         private void displayXYSeries()
@@ -64,18 +65,20 @@ namespace StockPlot.Charts.Models
 
         private void displayFills()
         {
-            foreach (var fill in _indicator.Fills)
+            foreach (var fill in _indicator.XyySeries)
             {
-                var plot = _plotArea.Plot.AddFill(new double[3] { 1,1,1 }, new double[3] { 1,1,1 }, new double[3] { 1, 1, 1 }, new double[3] { 1, 1, 1 });
+                var color = Color.FromArgb(20, fill.Color);
+
+                var plot = _plotArea.Plot.AddFill(new double[3] { 1,1,1 }, new double[3] { 1,1,1 }, new double[3] { 1, 1, 1 }, color:color);
                 plot.YAxisIndex = 1;
                 _series.Add(plot);
 
                 _indicator.OnCalculated += () =>
                 {
-                    var xs1 = _indicator.Series.Where(x => x.SerieName == fill.SerieA).First().Select(x => x.Time.ToOADate()).ToArray();
-                    var xs2 = _indicator.Series.Where(x => x.SerieName == fill.SerieB).First().Select(x => x.Time.ToOADate()).ToArray();
-                    var ys1 = _indicator.Series.Where(x => x.SerieName == fill.SerieA).First().Select(x => x.Value).ToArray();
-                    var ys2 = _indicator.Series.Where(x => x.SerieName == fill.SerieB).First().Select(x => x.Value).ToArray();
+                    var ys1 = fill.Select(x => x.Item2).ToArray();
+                    var ys2 = fill.Select(x => x.Item3).ToArray();
+                    var xs1 = fill.Select(x => x.Item1.ToOADate()).ToArray();
+                    var xs2 = fill.Select(x => x.Item1.ToOADate()).ToArray();
 
                     // combine xs and ys to make one big curve
                     int pointCount = xs1.Length + xs2.Length;
@@ -93,6 +96,7 @@ namespace StockPlot.Charts.Models
                         bothY[ys1.Length + i] = ys2[ys2.Length - 1 - i];
                     }
 
+                    
                     plot.Xs = bothX;
                     plot.Ys = bothY;
 

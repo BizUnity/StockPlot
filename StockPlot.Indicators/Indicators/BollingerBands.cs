@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Linq;
 
 namespace StockPlot.Indicators.Indicators
 {
@@ -10,6 +11,8 @@ namespace StockPlot.Indicators.Indicators
 
         public XYSerie Down { get; private set; } = new XYSerie("Down");
 
+        public XYYSerie Cloud { get; private set; } = new XYYSerie("Cloud");
+
         [IndicatorParameter]
         public int Period { get; set; } = 20;
 
@@ -19,6 +22,7 @@ namespace StockPlot.Indicators.Indicators
         public override void Init()
         {
             this.Name = $"Bollinger Bands [{Period}]";
+            AddFill("Up", "Down");
         }
 
         protected override void Calculate_(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume)
@@ -32,6 +36,8 @@ namespace StockPlot.Indicators.Indicators
                 this.Middle.Append((time[i], ma));
                 this.Down.Append((time[i], ma - (Deviation * std)));
                 this.Up.Append((time[i], ma + (Deviation * std)));
+
+                Cloud.Append((time[i], ma - (Deviation * std), ma + (Deviation * std)));
             }
         }
     }

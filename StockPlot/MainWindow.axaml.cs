@@ -31,19 +31,19 @@ public partial class MainWindow : Window
     {
         var client = new BinanceClient();
 
-        var request = await client.SpotApi.ExchangeData.GetUiKlinesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneMinute, limit: 500);
+        var request = await client.SpotApi.ExchangeData.GetUiKlinesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneHour, limit: 500);
 
         if (request.Success)
         {
             var model = new StockPricesModel();
-            var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice, (double)x.HighPrice, (double)x.LowPrice, (double)x.ClosePrice, x.OpenTime, TimeSpan.FromMinutes(1))).ToArray();
+            var bars = request.Data.Select(x => new OHLC((double)x.OpenPrice, (double)x.HighPrice, (double)x.LowPrice, (double)x.ClosePrice, x.OpenTime, TimeSpan.FromMinutes(60))).ToArray();
 
             model.Append(bars);
 
             _chart.PricesModel = model;
 
             var socket = new BinanceSocketClient();
-            await socket.SpotStreams.SubscribeToKlineUpdatesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneMinute, async (data) =>
+            await socket.SpotStreams.SubscribeToKlineUpdatesAsync(_symbol, Binance.Net.Enums.KlineInterval.OneHour, async (data) =>
             {
                 await Dispatcher.UIThread.InvokeAsync(() =>
                 {
@@ -62,7 +62,7 @@ public partial class MainWindow : Window
                     }
                     else
                     {
-                        var newBar = new OHLC((double)candle.OpenPrice, (double)candle.HighPrice, (double)candle.LowPrice, (double)candle.ClosePrice, candle.OpenTime, TimeSpan.FromMinutes(1));
+                        var newBar = new OHLC((double)candle.OpenPrice, (double)candle.HighPrice, (double)candle.LowPrice, (double)candle.ClosePrice, candle.OpenTime, TimeSpan.FromMinutes(60));
                         model.Append(newBar);
                     }
                 }, DispatcherPriority.Background);                       

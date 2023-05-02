@@ -1,15 +1,10 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Diagnostics;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using StockPlot.Indicators;
 
 namespace StockPlot.Charts.Controls
@@ -95,7 +90,13 @@ namespace StockPlot.Charts.Controls
 
             if (property.GetValue(Item).GetType() == typeof(string))
             {
-                var prop = new TextBox() { Height = 36, Width = Width / 2.5, Text = property.GetValue(Item).ToString(), Padding = new Thickness(6), HorizontalAlignment = HorizontalAlignment.Right, HorizontalContentAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 2, 10, 2) };
+                var prop = new TextBox() { Width = Width / 2.5,
+                    Text = property.GetValue(Item).ToString(),
+                    Padding = new Thickness(6),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    HorizontalContentAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(0, 2, 10, 2) };
                 prop.GetObservable(TextBox.TextProperty).Subscribe(value => property.SetValue(Item, value));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);
@@ -104,7 +105,13 @@ namespace StockPlot.Charts.Controls
 
             else if (property.GetValue(Item).GetType() == typeof(int))
             {
-                var prop = new NumericUpDown() { Width = Width / 2.5, Height = 36, Value = Decimal.Parse(property.GetValue(Item).ToString()), Increment = 1, Padding = new Thickness(0, 0, 5, 0), HorizontalAlignment = HorizontalAlignment.Right, HorizontalContentAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 2, 10, 2) };
+                var prop = new NumericUpDown() { Width = Width / 2.5, 
+                    Value = Decimal.Parse(property.GetValue(Item).ToString()),
+                    Increment = 1, Padding = new Thickness(0, 0, 5, 0),
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    HorizontalContentAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(0, 2, 10, 2) };
                 prop.GetObservable(NumericUpDown.ValueProperty).Subscribe(value => property.SetValue(Item, Int32.Parse(value.ToString())));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);
@@ -112,7 +119,13 @@ namespace StockPlot.Charts.Controls
 
             else if (property.GetValue(Item).GetType() == typeof(double))
             {
-                var prop = new NumericUpDown() { Width = Width / 2.5, Height = 36, Value = (decimal?)(double)property.GetValue(Item), Increment = 0.001M, Padding = new Thickness(0, 0, 5, 0), HorizontalAlignment = HorizontalAlignment.Right, HorizontalContentAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 2, 10, 2) };
+                var prop = new NumericUpDown() { Width = Width / 2.5,
+                    Value = (decimal?)(double)property.GetValue(Item),
+                    Increment = 0.001M, Padding = new Thickness(0, 0, 5, 0),
+                    HorizontalAlignment = HorizontalAlignment.Right, 
+                    HorizontalContentAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Margin = new Thickness(0, 2, 10, 2) };
                 prop.GetObservable(NumericUpDown.ValueProperty).Subscribe(value => property.SetValue(Item, Double.Parse(value.ToString())));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);
@@ -120,7 +133,10 @@ namespace StockPlot.Charts.Controls
 
             else if (property.GetValue(Item).GetType() == typeof(bool))
             {
-                var prop = new ToggleButton() {Height = 36, Margin = new Thickness(0, 0, 5, 0), HorizontalContentAlignment = HorizontalAlignment.Right, HorizontalAlignment = HorizontalAlignment.Right, IsChecked = (bool)property.GetValue(Item) };
+                var prop = new ToggleButton() { Margin = new Thickness(0, 0, 5, 0),
+                    HorizontalContentAlignment = HorizontalAlignment.Right, 
+                    HorizontalAlignment = HorizontalAlignment.Right, 
+                    IsChecked = (bool)property.GetValue(Item) };
                 prop.GetObservable(ToggleButton.IsCheckedProperty).Subscribe(value => property.SetValue(Item, (bool)value));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);

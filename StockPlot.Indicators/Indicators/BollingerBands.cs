@@ -5,13 +5,13 @@ namespace StockPlot.Indicators.Indicators
 {
     public sealed class BollingerBands : IndicatorBase
     {
-        public XYSerie Middle { get; } = new XYSerie("Middle") { DefaultColor = Color.Blue };
+        public XYSerie Middle { get; } = new XYSerie("Middle") { DefaultColor = Color.FromArgb(50, Color.Blue) };
 
-        public XYSerie Up { get; private set; } = new XYSerie("Up");
+        public XYSerie Up { get; private set; } = new XYSerie("Up") { DefaultColor = Color.FromArgb(50, Color.Blue) };
 
-        public XYSerie Down { get; private set; } = new XYSerie("Down");
+        public XYSerie Down { get; private set; } = new XYSerie("Down") { DefaultColor = Color.FromArgb(50, Color.Blue) };
 
-        public XYYSerie Cloud { get; private set; } = new XYYSerie("Cloud");
+        public XYYSerie Cloud { get; private set; } = new XYYSerie("Cloud") { Color = Color.Blue };
 
         [IndicatorParameter]
         public int Period { get; set; } = 20;

@@ -18,7 +18,8 @@ namespace StockPlot.Indicators
                     {"MACD", typeof(MACD) },
                     {"EMA", typeof(ExponentialMovingAverage)},
                     {"Donchian", typeof(Donchian) },
-                    {"Stochastic", typeof(Stochastic)}
+                    {"Stochastic", typeof(Stochastic)},
+                    {"CCI", typeof(CCI) }
                 };
             }
         }

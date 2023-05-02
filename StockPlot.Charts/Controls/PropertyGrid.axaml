@@ -5,18 +5,23 @@
 			 IsVisible="False"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="StockPlot.Charts.Controls.PropertyGrid">
-	<Grid RowDefinitions="auto, auto">
-		<ScrollViewer>
-			<StackPanel  HorizontalAlignment="Stretch"
-						 Name="StackProperties">
+	<Border CornerRadius="4"
+			Background="White"
+			BorderBrush="Gray"
+			BorderThickness="1">
+		<Grid RowDefinitions="auto, auto">
+			<ScrollViewer>
+				<StackPanel  HorizontalAlignment="Stretch"
+							 Name="StackProperties">
 
+				</StackPanel>
+			</ScrollViewer>
+			<StackPanel Orientation="Horizontal"
+						Grid.Row="1">
+				<Button Content="Ok"
+						Name="okButton"
+						Margin="3"/>
 			</StackPanel>
-		</ScrollViewer>
-		<StackPanel Orientation="Horizontal"
-					Grid.Row="1">
-			<Button Content="Ok"					
-					Name="okButton"
-					Margin="3"/>
-		</StackPanel>
-	</Grid>
+		</Grid>
+	</Border>
 </UserControl>

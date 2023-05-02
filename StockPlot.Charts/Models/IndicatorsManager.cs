@@ -226,7 +226,7 @@ namespace StockPlot.Charts.Models
         /// <summary>
         /// List of available indicators in an Observable for UI purpose
         /// </summary>
-        public ObservableCollection<string> Indicators { get; private set;  } = new ObservableCollection<string>(IndicatorsList.Indicators.Keys);
+        public ObservableCollection<string> Indicators { get; private set;  } = new ObservableCollection<string>(IndicatorsList.Indicators.Keys.Order());
 
         /// <summary>
         /// The list of working indicators displayed on the main price area

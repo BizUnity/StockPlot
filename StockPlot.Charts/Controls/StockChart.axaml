@@ -4,11 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:avaPlot="using:ScottPlot.Avalonia"
+			 xmlns:local="using:StockPlot.Charts.Controls"
              x:Class="StockPlot.Charts.Controls.StockChart">
 	<Grid RowDefinitions="*"
 		  Name="MainArea">
 		<avaPlot:AvaPlot Name="PriceArea"/>
 		<TextBlock Text="mouse cordinate"
 				   Name="MouseTextBlock"/>
+	<local:PropertyGrid Name="PropertyGrid"
+						Background="Red"
+						VerticalAlignment="Center"
+						HorizontalAlignment="Center"/>
 	</Grid>
 </UserControl>

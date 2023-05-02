@@ -20,6 +20,8 @@ namespace StockPlot.Charts.Controls
         private TextBlock _mouseTxtBlock;
         private HLine _lastPriceLine;
         private IndicatorsManager _indicatorsManager;
+        internal PropertyGrid _propertyGrid;
+
         #endregion
 
         public event StockPricesModelChangedHandler StockPricesModelChanged;
@@ -31,7 +33,7 @@ namespace StockPlot.Charts.Controls
             _mainArea = this.Find<Grid>("MainArea");
             _pricePlot = this.Find<AvaPlot>("PriceArea");
             _mouseTxtBlock = this.Find<TextBlock>("MouseTextBlock");
-
+            _propertyGrid = this.Find<PropertyGrid>("PropertyGrid");
             // add the indicator manager
             // indicator manager helps to manage the indicators logic in order to keep this class clean as it's dedicated only to the price changement flow and price area
             //TODO : Make it a s a property to share it in external apps

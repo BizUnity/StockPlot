@@ -6,7 +6,6 @@ using StockPlot.Charts.Helpers;
 using StockPlot.Indicators;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using System.Xml.Linq;
 
 namespace StockPlot.Charts.Models
 {
@@ -133,6 +132,18 @@ namespace StockPlot.Charts.Models
             //reset the zomm
             if(indicator.IsExternal)
                 plotArea.Plot.AxisAuto();
+
+            // Testing propertygrid
+            _stockChart.PropertyGrid.Item = indicator;
+            _stockChart.PropertyGrid.IsVisible = true;
+
+            _stockChart.PropertyGrid.OkButton.Click += (o, e) =>
+            {
+                indicator.Init();
+
+                indicator.Calc(_stockChart.PricesModel);
+                _stockChart.PropertyGrid.IsVisible = false;
+            };
         }
 
         private void addSubChart(UserControl chart)

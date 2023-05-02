@@ -6,7 +6,6 @@
 			 xmlns:avaPlot="using:ScottPlot.Avalonia"
              x:Class="StockPlot.Charts.Controls.StockChart">
 	<Grid RowDefinitions="*"
-		  Background="Orange"
 		  Name="MainArea">
 		<avaPlot:AvaPlot Name="PriceArea"/>
 		<TextBlock Text="mouse cordinate"

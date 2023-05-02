@@ -94,7 +94,7 @@ namespace StockPlot.Charts.Models
                 // add a new sub chart in the main grid
                 addSubChart(subIndicator);
 
-                _stockChart.PriceArea.Plot.BottomAxis.Ticks(false);
+                _stockChart.PriceArea.Plot.BottomAxis.Ticks(false);                
             }
 
             var manager = new IndicatorItemManager(indicator, plotArea);          
@@ -129,6 +129,10 @@ namespace StockPlot.Charts.Models
                 subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
 
             plotArea.Refresh();
+
+            //reset the zomm
+            if(indicator.IsExternal)
+                plotArea.Plot.AxisAuto();
         }
 
         private void addSubChart(UserControl chart)

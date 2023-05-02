@@ -68,7 +68,9 @@ namespace StockPlot.Charts.Helpers
             // setup the axises
             plot.Plot.XAxis.DateTimeFormat(true);
             plot.Plot.YAxis.Ticks(false);
-            plot.Plot.YAxis2.Ticks(true);           
+            plot.Plot.YAxis2.Ticks(true);
+
+            plot.Configuration.LockVerticalAxis = true;
         }
 
         public static void ResetZoom(string chartId)

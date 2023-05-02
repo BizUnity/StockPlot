@@ -34,10 +34,10 @@ namespace StockPlot.Charts.Models
                 switch (serie.PlotType)
                 {
                     case PlotType.Line:
-                        var line = _plotArea.Plot.AddScatterLines(null, null, serie.DefaultColor);
+                        var lineStyle = serie.PlotType == PlotType.DashedLine ? ScottPlot.LineStyle.DashDot : serie.PlotType == PlotType.Dot ? ScottPlot.LineStyle.Dot : ScottPlot.LineStyle.Solid;
+                        var line = _plotArea.Plot.AddScatterLines(null, null, serie.DefaultColor, serie.Lenght, lineStyle);
                         line.OnNaN = ScatterPlot.NanBehavior.Gap;
                         line.YAxisIndex = 1;
-                        line.LineWidth = serie.Lenght;
                         // add the serie to the whoe list to clear in on removeing indictors
                         _series.Add(line);
 

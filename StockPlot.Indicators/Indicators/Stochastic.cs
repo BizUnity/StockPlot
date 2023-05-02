@@ -5,8 +5,8 @@ namespace StockPlot.Indicators.Indicators
     public sealed class Stochastic : IndicatorBase
     {
         public XYYSerie Cloud { get; } = new XYYSerie("Stochastic");
-        public XYSerie FastSerie { get; } = new XYSerie("Fast");
-        public XYSerie SlowSerie { get; } = new XYSerie("Slow");
+        public XYSerie FastSerie { get; } = new XYSerie("Fast") { PlotType = PlotType.Line };
+        public XYSerie SlowSerie { get; } = new XYSerie("Slow") { PlotType= PlotType.DashedLine };
 
         [IndicatorParameter]
         public int K { get; set; } = 5;
@@ -20,8 +20,8 @@ namespace StockPlot.Indicators.Indicators
             IsExternal = true;
 
             CreateLevel(50, Color.White);
-            CreateLevel(80, Color.Red);
-            CreateLevel(20, Color.LightSeaGreen);
+            CreateLevel(70, Color.Red);
+            CreateLevel(30, Color.LightSeaGreen);
         }
 
         public override void Init()

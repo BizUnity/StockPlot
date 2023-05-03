@@ -8,7 +8,7 @@ namespace StockPlot.Charts.Drawings
     public class TrendLine : ReactiveObject
     {
         private bool _inCreationMode = false;
-        private OScatterPlot _line;
+        private OScatterPlotDraggable _line;
         private int _steps = 0;
         private double[] xs = new double[2] { 0, 0 };
         private double[] ys = new double[2] { 0, 0 };
@@ -16,7 +16,11 @@ namespace StockPlot.Charts.Drawings
 
         public TrendLine()
         {
-            _line = new OScatterPlot(xs, ys);        
+            _line = new OScatterPlotDraggable(xs, ys);
+            _line.DragEnabled = true;
+            _line.DragEnabledX = true;
+            _line.DragEnabledY = true;
+            Color = Color.Red;
         }
 
         public Color Color
@@ -55,7 +59,8 @@ namespace StockPlot.Charts.Drawings
             if (_inCreationMode)
             {
                 (double coordinateX, double coordinateY) = _plot.GetMouseCoordinates();
-              
+
+               
                 if(_steps == 0)
                 {
                     xs[0] = coordinateX;

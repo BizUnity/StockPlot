@@ -1,8 +1,5 @@
 ﻿using ScottPlot.Drawing;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 namespace ScottPlot.Plottable
 {
@@ -235,14 +232,6 @@ namespace ScottPlot.Plottable
 
         public AxisLimits GetAxisLimits()
         {
-            /* return OnNaN switch
-             {
-                 NanBehavior.Throw => GetAxisLimitsThrowOnNaN(),
-                 NanBehavior.Ignore => GetAxisLimitsIgnoreNaN(),
-                 NanBehavior.Gap => GetAxisLimitsIgnoreNaN(),
-                 _ => throw new NotImplementedException($"{nameof(OnNaN)} behavior not yet supported: {OnNaN}"),
-             };*/
-
             return AxisLimits.NoLimits;
         }
 

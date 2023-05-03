@@ -43,9 +43,14 @@
 							<TextBlock Text="{Binding Indicator.Name}"									   
 									   Margin="3"
 									   HorizontalAlignment="Left"/>
-							<Button Margin="3"
-									Content="Remove"
-									Command="{Binding RemoveIndicatorCommand}"/>
+							<StackPanel Orientation="Horizontal">
+								<Button Margin="3"
+										Content="Properties"
+										Command="{Binding ShowPropertiesCommand}"/>
+								<Button Margin="3"
+										Content="Remove"
+										Command="{Binding RemoveIndicatorCommand}"/>
+							</StackPanel>
 						</StackPanel>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>

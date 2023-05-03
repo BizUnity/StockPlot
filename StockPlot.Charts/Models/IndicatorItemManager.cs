@@ -122,6 +122,8 @@ namespace StockPlot.Charts.Models
         }
 
         public ICommand RemoveIndicatorCommand { get; internal set; }
+
+        public ICommand ShowPropertiesCommand { get; internal set; }
         #endregion
 
         public void Dispose()

@@ -7,9 +7,25 @@
              x:Class="StockPlot.Charts.Controls.SubIndicator">
 	<Grid>
 		<avaPlot:AvaPlot Name="plotArea"/>
-		<Button Content="remove"
-				VerticalAlignment="Top"
-				Name="removeBTN"
-				HorizontalAlignment="Left"/>
+		<StackPanel Orientation="Horizontal"
+					VerticalAlignment="Top"
+					HorizontalAlignment="Left"
+					Background="White"
+					Margin="5,10">
+			<TextBlock Name="nameTxtBlock"
+					   VerticalAlignment="Center"
+					   Margin="3"
+					   Text="Name of the indicator"/>
+			<Button Content="Properties"
+					VerticalAlignment="Top"
+					Margin="3"
+					Name="propertiesBTN"
+					HorizontalAlignment="Left"/>
+			<Button Content="remove"
+					VerticalAlignment="Top"
+					Margin="3"
+					Name="removeBTN"
+					HorizontalAlignment="Left"/>
+		</StackPanel>
 	</Grid>
 </UserControl>

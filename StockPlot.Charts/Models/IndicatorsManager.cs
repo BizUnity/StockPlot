@@ -121,21 +121,8 @@ namespace StockPlot.Charts.Models
                 OnPriceIndicators.Add(manager);
             }
 
-            // handle te remove process
-            addDeleteCommand(manager);
-            // if the indicator is a sub one, we need to provide the Button with the delete command
-            if (subIndicator != null)
-                subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
-
-            plotArea.Refresh();
-
-            //reset the zomm
-            if(indicator.IsExternal)
-                plotArea.Plot.AxisAuto();
-
-            // Testing propertygrid
-            _stockChart.PropertyGrid.Item = indicator;
-            _stockChart.PropertyGrid.IsVisible = true;
+            //  propertygrid
+            indicator.SchowProperties(_stockChart);
 
             _stockChart.PropertyGrid.OkButton.Click += (o, e) =>
             {
@@ -144,6 +131,28 @@ namespace StockPlot.Charts.Models
                 indicator.Calc(_stockChart.PricesModel);
                 _stockChart.PropertyGrid.IsVisible = false;
             };
+
+            manager.ShowPropertiesCommand = ReactiveCommand.Create(() =>
+            {
+                indicator.SchowProperties(_stockChart);
+            });
+
+            // handle te remove process
+            addDeleteCommand(manager);
+            // if the indicator is a sub one, we need to provide the Button with the delete command
+            if (subIndicator != null)
+            {
+                subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
+                subIndicator!.propertiesBTN.Command = manager.ShowPropertiesCommand;
+                subIndicator.nameTxtBlock.Text = indicator.Name;
+            }
+               
+
+            plotArea.Refresh();
+
+            //reset the zomm
+            if(indicator.IsExternal)
+                plotArea.Plot.AxisAuto();          
         }
 
         private void addSubChart(UserControl chart)

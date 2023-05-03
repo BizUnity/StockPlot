@@ -1,5 +1,7 @@
-﻿using StockPlot.Charts.Models;
+﻿using StockPlot.Charts.Controls;
+using StockPlot.Charts.Models;
 using StockPlot.Indicators;
+using System.Runtime.CompilerServices;
 
 namespace StockPlot.Charts
 {
@@ -18,5 +20,11 @@ namespace StockPlot.Charts
                 model.Prices.Select(x => x.Close).ToArray(),
                 model.Prices.Select(x => x.Volume).ToArray());
         }
-    }
+
+        public static void SchowProperties(this IndicatorBase indicator, StockChart chart)
+        {
+            chart.PropertyGrid.Item = indicator;
+            chart.PropertyGrid.IsVisible = true;
+        }
+    }    
 }

@@ -96,7 +96,7 @@ namespace StockPlot.Charts.Controls
                     HorizontalAlignment = HorizontalAlignment.Right,
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(0, 2, 10, 2) };
+                    Margin = new Thickness(3) };
                 prop.GetObservable(TextBox.TextProperty).Subscribe(value => property.SetValue(Item, value));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);
@@ -111,7 +111,7 @@ namespace StockPlot.Charts.Controls
                     HorizontalAlignment = HorizontalAlignment.Right,
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(0, 2, 10, 2) };
+                    Margin = new Thickness(3) };
                 prop.GetObservable(NumericUpDown.ValueProperty).Subscribe(value => property.SetValue(Item, Int32.Parse(value.ToString())));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);
@@ -125,7 +125,7 @@ namespace StockPlot.Charts.Controls
                     HorizontalAlignment = HorizontalAlignment.Right, 
                     HorizontalContentAlignment = HorizontalAlignment.Right,
                     VerticalAlignment = VerticalAlignment.Center,
-                    Margin = new Thickness(0, 2, 10, 2) };
+                    Margin = new Thickness(3) };
                 prop.GetObservable(NumericUpDown.ValueProperty).Subscribe(value => property.SetValue(Item, Double.Parse(value.ToString())));
                 gridItem.Children.Add(prop);
                 Grid.SetColumn(prop, 1);

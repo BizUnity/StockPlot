@@ -7,4 +7,12 @@ namespace StockPlot.Charts
         OHLC,
         Line
     }
+
+    public enum DrawType
+    {
+        HorizontalLine,
+        VerticalLine,
+        TrendLine,
+        Fibonacci
+    }
 }

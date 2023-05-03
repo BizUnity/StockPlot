@@ -1,17 +1,16 @@
 ﻿using ReactiveUI;
-using ScottPlot;
 using ScottPlot.Avalonia;
 using ScottPlot.Plottable;
 using System.Drawing;
 
 namespace StockPlot.Charts.Drawings
 {
-    public class HorizontalLine : ReactiveObject
+    public class VerticalLine : ReactiveObject
     {
-        internal HLine _line = new HLine();
+        internal VLine _line = new VLine();
         private bool _inCreationMode = false;
 
-        public HorizontalLine()
+        public VerticalLine()
         {
             _line.DragEnabled = true;
             _line.Dragged += _line_Dragged;
@@ -19,16 +18,16 @@ namespace StockPlot.Charts.Drawings
 
         private void _line_Dragged(object? sender, EventArgs e)
         {
-            this.RaisePropertyChanged(nameof(Y));
+            this.RaisePropertyChanged(nameof(X));
         }
 
-        public double Y
+        public double X
         {
-            get => _line.Y;
+            get => _line.X;
             set
             {
-                _line.Y = value;
-                this.RaisePropertyChanged(nameof(Y));
+                _line.X = value;
+                this.RaisePropertyChanged(nameof(X));
             }
         }
 
@@ -56,7 +55,7 @@ namespace StockPlot.Charts.Drawings
 
                 (double coordinateX, double coordinateY) = (sender as AvaPlot).GetMouseCoordinates();
 
-                Y = coordinateY;
+                X = coordinateX;
 
                 _inCreationMode = false;
 

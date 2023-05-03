@@ -15,7 +15,7 @@ namespace StockPlot.Charts.Models
             _stockChart.PriceArea.PointerPressed += PriceArea_PointerPressed;
 
             //test
-            ActivateDrawingMode(DrawType.VerticalLine);
+            EnableDrawingMode(DrawType.TrendLine);
         }
 
         private void PriceArea_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
@@ -24,7 +24,7 @@ namespace StockPlot.Charts.Models
                 return;
         }
 
-        public void ActivateDrawingMode(DrawType type)
+        public void EnableDrawingMode(DrawType type)
         {
             _drawingMode = true;
             _drawType = type;
@@ -38,6 +38,10 @@ namespace StockPlot.Charts.Models
                 case DrawType.VerticalLine:
                     var vline = new StockPlot.Charts.Drawings.VerticalLine();
                     vline.Create(_stockChart.PriceArea);
+                    break;
+                case DrawType.TrendLine:
+                    var trend = new StockPlot.Charts.Drawings.TrendLine();
+                    trend.Create(_stockChart.PriceArea);
                     break;
             }
         }

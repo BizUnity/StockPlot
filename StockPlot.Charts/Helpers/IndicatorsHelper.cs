@@ -21,8 +21,9 @@ namespace StockPlot.Charts
                 model.Prices.Select(x => x.Volume).ToArray());
         }
 
-        public static void SchowProperties(this IndicatorBase indicator, StockChart chart)
+        public static void ShowProperties(this IndicatorBase indicator, StockChart chart)
         {
+            chart.PropertyGrid.ZIndex = chart.MainArea.Children.Count;
             chart.PropertyGrid.Item = indicator;
             chart.PropertyGrid.IsVisible = true;
         }

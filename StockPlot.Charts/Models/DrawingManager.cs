@@ -15,7 +15,7 @@ namespace StockPlot.Charts.Models
             _stockChart.PriceArea.PointerPressed += PriceArea_PointerPressed;
 
             //test
-            EnableDrawingMode(DrawType.TrendLine);
+            //EnableDrawingMode(DrawType.TrendLine);
         }
 
         private void PriceArea_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)

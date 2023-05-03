@@ -10,9 +10,11 @@
 		  Name="MainArea">
 		<avaPlot:AvaPlot Name="PriceArea"/>
 		<TextBlock Text="mouse cordinate"
+				   IsVisible="False"
 				   Name="MouseTextBlock"/>
 	<local:PropertyGrid Name="PropertyGrid"
 						VerticalAlignment="Center"
+						Grid.RowSpan="50"
 						HorizontalAlignment="Center"/>
 	</Grid>
 </UserControl>

@@ -122,7 +122,7 @@ namespace StockPlot.Charts.Models
             }
 
             //  propertygrid
-            indicator.SchowProperties(_stockChart);
+            indicator.ShowProperties(_stockChart);
 
             _stockChart.PropertyGrid.OkButton.Click += (o, e) =>
             {
@@ -134,7 +134,7 @@ namespace StockPlot.Charts.Models
 
             manager.ShowPropertiesCommand = ReactiveCommand.Create(() =>
             {
-                indicator.SchowProperties(_stockChart);
+                indicator.ShowProperties(_stockChart);
             });
 
             // handle te remove process

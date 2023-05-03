@@ -6,7 +6,7 @@ An initiative of [Ouinex Exchange](http://ouinex.com/ "Ouinex Exchange") and [Bi
 ![](/Images/BizUnity.jpeg)
 
 # StockPlot
-![](/Images/StockPlot5.gif)
+![](/Images/StockPlot6.gif)
 
 A Technical analysis library for [AvaloniaUI](https://avaloniaui.net/ "AvaloniaUI"), based on [ScottPlot](https://scottplot.net/ "ScottPlot") DataVisualization Library (v 4.1.63).
 
@@ -30,6 +30,7 @@ Play around, do not hesitate to contribute <3 .
 + Auto hide or show the X axis. (Only the last Plot X axis need to be shown).
 + Auto link the X axis with sub indicators and main price area.
 + Shared cross hair between price area and sub charts.
++ Display & modify properties of an indicator.
 
 
 ## Features planned

@@ -20,6 +20,7 @@ namespace StockPlot.Charts.Controls
         private TextBlock _mouseTxtBlock;
         private HLine _lastPriceLine;
         private IndicatorsManager _indicatorsManager;
+        private DrawingManager _drawingManager;
         internal PropertyGrid _propertyGrid;
 
         #endregion
@@ -38,6 +39,8 @@ namespace StockPlot.Charts.Controls
             // indicator manager helps to manage the indicators logic in order to keep this class clean as it's dedicated only to the price changement flow and price area
             //TODO : Make it a s a property to share it in external apps
             _indicatorsManager = new IndicatorsManager(this);
+
+            _drawingManager = new DrawingManager(this);
 
             initBases();
         }
@@ -212,6 +215,14 @@ namespace StockPlot.Charts.Controls
         public IndicatorsManager IndicatorsManager
         {
             get => _indicatorsManager;
+        }
+
+        /// <summary>
+        /// Drawing manager contains de logics to create and manage draw such as trendline and analysis tools.
+        /// </summary>
+        public DrawingManager DrawingManager
+        { 
+            get => _drawingManager; 
         }
         #endregion
     }

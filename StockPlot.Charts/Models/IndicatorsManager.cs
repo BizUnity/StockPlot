@@ -158,7 +158,7 @@ namespace StockPlot.Charts.Models
         private void addSubChart(UserControl chart)
         {
             _stockChart.MainArea.RowDefinitions.Add(new RowDefinition() { Height = new GridLength(3, GridUnitType.Auto) });
-            _stockChart.MainArea.RowDefinitions.Add(new RowDefinition() { Height= new GridLength(250, GridUnitType.Pixel)});
+            _stockChart.MainArea.RowDefinitions.Add(new RowDefinition());
 
             var splitter = new GridSplitter()
             {

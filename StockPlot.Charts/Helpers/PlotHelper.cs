@@ -28,7 +28,7 @@ namespace StockPlot.Charts.Helpers
             plot.Plot.YAxis.Ticks(false);
             plot.Plot.YAxis2.Ticks(true);
 
-            plot.Configuration.LockVerticalAxis = true;
+            //plot.Configuration.LockVerticalAxis = true;
 
             // init the crosshair
             var _crossHair = plot.Plot.AddCrosshair(0, 0);

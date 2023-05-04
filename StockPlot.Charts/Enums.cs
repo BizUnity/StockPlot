@@ -1,11 +1,11 @@
 ﻿
 namespace StockPlot.Charts
 {
-    public enum DisplayPrice
+    public enum DisplayPrice : int
     {
-        Candlestick,
-        OHLC,
-        Line
+        Candlestick=0,
+        OHLC=1,
+        Line=2
     }
 
     public enum DrawType

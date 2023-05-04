@@ -22,7 +22,7 @@ namespace StockPlot.Indicators.Indicators
             Name = $"CCI [{Period}]";
         }
 
-        public XYSerie Cci { get; private set; } = new XYSerie("CCI") { DefaultColor = Color.OrangeRed };
+        public XYSerie Cci { get; private set; } = new XYSerie("CCI") { DefaultColor = Color.BlueViolet };
 
         protected override void Calculate_(int total, DateTime[] time, double[] open, double[] high, double[] low, double[] close, double[] volume)
         {

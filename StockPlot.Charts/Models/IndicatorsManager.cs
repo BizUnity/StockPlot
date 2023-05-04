@@ -143,15 +143,15 @@ namespace StockPlot.Charts.Models
             if (subIndicator != null)
             {
                 subIndicator!.removeBTN.Command = manager.RemoveIndicatorCommand;
-                subIndicator!.nameTxtBlock.PointerPressed += (o, e) => manager.ShowPropertiesCommand.Execute(null);
-                subIndicator.nameTxtBlock.Text = indicator.Name;
+                subIndicator!.nameTxtBlock.Click += (o, e) => manager.ShowPropertiesCommand.Execute(null);
+                subIndicator.nameTxtBlock.Content = indicator.Name;
 
                 //manage the new name
                 _stockChart.PropertyGrid.OkButton.Click += (o, e) =>
                 {
                     if (subIndicator != null && indicator != null)
                     {
-                        subIndicator.nameTxtBlock.Text = indicator.Name;
+                        subIndicator.nameTxtBlock.Content = indicator.Name;
                         //reset the zoom to fit the area
                         plotArea.Plot.AxisAutoY();
                     }                       

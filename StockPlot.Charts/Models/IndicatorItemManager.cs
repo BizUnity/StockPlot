@@ -111,6 +111,11 @@ namespace StockPlot.Charts.Models
             foreach (var level in _indicator.Levels)
             {
                 var line = _plotArea.Plot.AddHorizontalLine(level.Y, level.LevelColor, label: level.Y.ToString());
+                line.PositionLabel = true;
+                line.PositionLabelOppositeAxis = true;
+                line.IgnoreAxisAuto = true;
+                line.PositionLabelBackground = level.LevelColor;
+                line.YAxisIndex = 1;
                 _series.Add(line);
             }
         }

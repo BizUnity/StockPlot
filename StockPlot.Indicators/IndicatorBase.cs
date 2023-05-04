@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace StockPlot.Indicators
 {
-    public abstract class IndicatorBase
+    public abstract class IndicatorBase : INotifyPropertyChanged
     {
         private string _name;
         private List<XYSerie> _xySeries = new List<XYSerie>();
@@ -18,6 +18,7 @@ namespace StockPlot.Indicators
             protected set
             {
                 _name = value;
+                OnPropertyChanged("Name");
             }
         }
 
@@ -125,6 +126,13 @@ namespace StockPlot.Indicators
             {
                 return false;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public delegate void CalculatedHandler();

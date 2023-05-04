@@ -21,7 +21,7 @@ namespace StockPlot.Indicators.Indicators
 
         public override void Init()
         {
-            this.Name = $"Bollinger Bands [{Period}]";
+            this.Name = $"Bollinger Bands [{Period}, {Deviation}]";
             AddFill("Up", "Down");
         }
 

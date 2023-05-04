@@ -9,6 +9,9 @@ namespace StockPlot.Charts.Helpers
 
         public static void SetupBasicPlot(AvaPlot plot, string stockChartID)
         {
+            // remove benchmark
+            plot.Configuration.DoubleClickBenchmark = false;
+
             // setup the axises
             plot.Plot.XAxis.DateTimeFormat(true);
             plot.Plot.YAxis.Ticks(false);

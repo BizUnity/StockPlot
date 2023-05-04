@@ -51,10 +51,11 @@ namespace StockPlot.Charts.Controls
             PlotHelper.SetupBasicPlot(_pricePlot, StockChartID);
 
             // create the price line
-            _lastPriceLine = _pricePlot.Plot.AddHorizontalLine(0, System.Drawing.Color.Gray, 1, LineStyle.Dot);
-            _lastPriceLine.PositionLabelAxis = _pricePlot.Plot.YAxis2;
+            _lastPriceLine = _pricePlot.Plot.AddHorizontalLine(0, System.Drawing.Color.FromArgb(23, 62, 113), 1, LineStyle.Dot);
             _lastPriceLine.PositionLabel = true;
+            _lastPriceLine.PositionLabelOppositeAxis = true;
             _lastPriceLine.IgnoreAxisAuto = true;
+            _lastPriceLine.PositionLabelBackground = System.Drawing.Color.FromArgb(23, 62, 113);
             _lastPriceLine.YAxisIndex = 1;
 
             // init the price series

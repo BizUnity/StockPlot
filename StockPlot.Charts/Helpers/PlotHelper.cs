@@ -9,6 +9,13 @@ namespace StockPlot.Charts.Helpers
 
         public static void SetupBasicPlot(AvaPlot plot, string stockChartID)
         {
+            // setup the axises
+            plot.Plot.XAxis.DateTimeFormat(true);
+            plot.Plot.YAxis.Ticks(false);
+            plot.Plot.YAxis2.Ticks(true);
+
+            plot.Configuration.LockVerticalAxis = true;
+
             // init the crosshair
             var _crossHair = plot.Plot.AddCrosshair(0, 0);
             _crossHair.IgnoreAxisAuto = true;
@@ -16,6 +23,8 @@ namespace StockPlot.Charts.Helpers
             _crossHair.LineWidth = 1;
             _crossHair.Color = System.Drawing.Color.DarkGray;
             _crossHair.VerticalLine.PositionFormatter = pos => DateTime.FromOADate(pos).ToString();
+            _crossHair.HorizontalLine.PositionLabel = true;
+            _crossHair.HorizontalLine.PositionLabelOppositeAxis = true;
 
             plot.PointerMoved += (o, e) =>
             {
@@ -65,12 +74,7 @@ namespace StockPlot.Charts.Helpers
                 plot.Refresh();
             };
 
-            // setup the axises
-            plot.Plot.XAxis.DateTimeFormat(true);
-            plot.Plot.YAxis.Ticks(false);
-            plot.Plot.YAxis2.Ticks(true);
-
-            plot.Configuration.LockVerticalAxis = true;
+            
         }
 
         public static void ResetZoom(string chartId)

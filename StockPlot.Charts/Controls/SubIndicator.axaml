@@ -11,21 +11,24 @@
 					VerticalAlignment="Top"
 					HorizontalAlignment="Left"
 					Background="White"
-					Margin="5,10">
+					Margin="10,2">
 			<TextBlock Name="nameTxtBlock"
 					   VerticalAlignment="Center"
 					   Margin="3"
+					   FontSize="10"
 					   Text="Name of the indicator"/>
-			<Button Content="Properties"
-					VerticalAlignment="Top"
-					Margin="3"
-					Name="propertiesBTN"
-					HorizontalAlignment="Left"/>
-			<Button Content="remove"
-					VerticalAlignment="Top"
+			<Button VerticalAlignment="Center"
 					Margin="3"
 					Name="removeBTN"
-					HorizontalAlignment="Left"/>
+					Background="Transparent"
+					ToolTip.Tip="Remove indicator"
+					Padding="0"
+					HorizontalAlignment="Left">
+				<Path Data="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
+					  Height="10"
+					  Stretch="Uniform"
+					  Fill="OrangeRed"/>
+			</Button>
 		</StackPanel>
 	</Grid>
 </UserControl>

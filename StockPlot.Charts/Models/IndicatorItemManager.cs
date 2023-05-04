@@ -22,9 +22,9 @@ namespace StockPlot.Charts.Models
 
             _indicator.Init();
 
+            displayLevels();
             displayFills();
-            displayXYSeries();
-            displayLevels();            
+            displayXYSeries();                      
         }
 
         private void displayXYSeries()

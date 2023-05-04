@@ -10,7 +10,6 @@
 		<StackPanel Orientation="Horizontal"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Left"
-					Background="White"
 					Margin="10,2">
 			<TextBlock Name="nameTxtBlock"
 					   VerticalAlignment="Center"

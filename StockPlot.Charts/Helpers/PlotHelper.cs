@@ -1,14 +1,25 @@
 ﻿using ScottPlot;
 using ScottPlot.Avalonia;
+using ScottPlot.Styles;
 
 namespace StockPlot.Charts.Helpers
 {
     public static class PlotHelper
     {
+        private static List<AvaPlot> Plots = new List<AvaPlot>();
+
+        private static IStyle _style;
+
         public static event ResetZoomHandler OnZoomReset;
 
         public static void SetupBasicPlot(AvaPlot plot, string stockChartID)
         {
+            //set style if existing
+            if (_style != null)
+                plot.Plot.Style(_style);
+
+            // add plot to the list 
+            Plots.Add(plot);
             // remove benchmark
             plot.Configuration.DoubleClickBenchmark = false;
 
@@ -83,6 +94,30 @@ namespace StockPlot.Charts.Helpers
         public static void ResetZoom(string chartId)
         {
             OnZoomReset?.Invoke(chartId);
+        }
+
+        public static void SetBlackStyle()
+        {
+            _style = ScottPlot.Style.GetStyles()[9];
+            SetStyle(_style);
+        }
+
+        public static void SetWhiteStyle()
+        {
+            _style = ScottPlot.Style.GetStyles()[6];
+            SetStyle(_style);
+        }
+
+        private static void SetStyle(IStyle style)
+        {
+            foreach (var plot in Plots)
+            {
+                if (plot != null)
+                {
+                    plot.Plot.Style(style);
+                    plot.Refresh();
+                }
+            }
         }
     }
 }

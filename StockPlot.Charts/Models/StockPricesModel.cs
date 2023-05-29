@@ -11,7 +11,7 @@ namespace StockPlot.Charts.Models
 
         public List<OHLC> Prices { get; private set; } = new List<OHLC>();
 
-        public StockPricesModel(bool generateRandom = false, int barsCount=500)
+        public StockPricesModel(bool generateRandom = false, int barsCount=100)
         {
             if (generateRandom)
             {

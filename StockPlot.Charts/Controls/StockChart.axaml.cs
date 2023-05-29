@@ -6,6 +6,7 @@ using ScottPlot.Avalonia;
 using ScottPlot.Plottable;
 using StockPlot.Charts.Helpers;
 using StockPlot.Charts.Models;
+using System.Text;
 
 namespace StockPlot.Charts.Controls
 {
@@ -42,10 +43,33 @@ namespace StockPlot.Charts.Controls
 
             _drawingManager = new DrawingManager(this);
 
+            StockChartID = GenId();
             initBases();
         }
 
         #region private methods
+        
+        private string GenId()
+        {
+            int length = 7;
+
+            // creating a StringBuilder object()
+            StringBuilder str_build = new StringBuilder();
+            Random random = new Random();
+
+            char letter;
+
+            for (int i = 0; i < length; i++)
+            {
+                double flt = random.NextDouble();
+                int shift = Convert.ToInt32(Math.Floor(25 * flt));
+                letter = Convert.ToChar(shift + 65);
+                str_build.Append(letter);
+            }
+
+            return str_build.ToString();
+        }
+
         private void initBases()
         {
             PlotHelper.SetupBasicPlot(_pricePlot, StockChartID);

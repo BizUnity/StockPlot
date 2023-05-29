@@ -88,7 +88,12 @@ namespace StockPlot.Charts.Helpers
                 plot.Refresh();
             };
 
-            
+
+            // auto y on zoom
+            plot.AxesChanged += (o, e) =>
+            {
+                plot.Plot.AxisAutoY();
+            };
         }
 
         public static void ResetZoom(string chartId)
